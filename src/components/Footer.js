@@ -12,7 +12,7 @@ const Footer = () => {
                         <div className="flex items-center justify-center">
                             <img src={logo} alt="" className='w-16 h-16 rounded-full' />
                         </div>
-                        <span className="self-center text-2xl font-semibold">Creative Construction</span>
+                        <span className="self-center text-2xl font-semibold text-blue-700">Creative Construction</span>
                     </NavLink>
 
                 </div>
