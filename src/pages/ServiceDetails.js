@@ -39,9 +39,7 @@ const ServiceDetails = () => {
             </div>
 
             <div className='w-4/5 mx-auto flex gap-x-1 mb-10'>
-                <span>To Write Review, Please</span>
-                <NavLink to={"/login"} className="text-blue-700 underline font-bold">Login</NavLink>
-                <span>First</span>
+                <NavLink to={"/login"} className="bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-md text-white">Write your own review</NavLink>
             </div>
         </div>
     );
