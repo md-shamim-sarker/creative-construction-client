@@ -20,7 +20,6 @@ const Header = () => {
 
     const toggleHandler = () => {
         setToggle(!toggle);
-        console.log(toggle);
     };
 
     return (
@@ -66,7 +65,7 @@ const Header = () => {
             </div>
             {/* For Mobile Device */}
 
-            <div className={`flex flex-col gap-y-5 font-bold lg:hidden fixed bg-blue-100 top-16 right-0 p-10 ${toggle ? 'hidden' : 'block'}`} onClick={toggleHandler}>
+            <div className={`flex flex-col gap-y-5 font-bold lg:hidden fixed bg-blue-100 top-16 right-0 px-10 py-5 ${toggle ? 'hidden' : 'block'}`} onClick={toggleHandler}>
                 <NavLink to={"/"} className='text-blue-900 hover:text-blue-600'>Home</NavLink>
                 <NavLink to={"/services"} className='text-blue-900 hover:text-blue-600'>Services</NavLink>
                 <NavLink to={"/blog"} className='text-blue-900 hover:text-blue-600'>Blog</NavLink>
