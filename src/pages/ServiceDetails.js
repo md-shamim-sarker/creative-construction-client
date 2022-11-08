@@ -1,10 +1,11 @@
 import React from 'react';
 import {NavLink, useLoaderData} from 'react-router-dom';
 import {FaStar} from 'react-icons/fa';
+import useTitle from '../hooks/useTitle';
 
 const ServiceDetails = () => {
     const {title, image, description, fields, price, rating} = useLoaderData();
-
+    useTitle("Service Details");
     return (
         <div className='w-4/5 mx-auto mt-20 mb-18'>
             <h2 className='text-4xl font-bold text-center mb-5 text-blue-700'>{title}</h2>

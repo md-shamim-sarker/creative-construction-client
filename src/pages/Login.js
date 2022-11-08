@@ -2,9 +2,10 @@ import React, {useContext, useState} from 'react';
 import {FaGoogle, FaFacebook} from 'react-icons/fa';
 import {NavLink, useLocation, useNavigate} from 'react-router-dom';
 import {AuthContext} from '../contexts/UserContext';
+import useTitle from '../hooks/useTitle';
 
 const Login = () => {
-
+    useTitle("Login");
     const [message, setMessage] = useState("");
     const {signIn, signInWithGoogle, signInWithFacebook} = useContext(AuthContext);
 

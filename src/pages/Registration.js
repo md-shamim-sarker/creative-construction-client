@@ -1,10 +1,12 @@
 import React, {useContext, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 import {AuthContext} from '../contexts/UserContext';
+import useTitle from '../hooks/useTitle';
 
 const Registration = () => {
     const [message, setMessage] = useState("");
     const {createUser, updateUser, logOut, setUser} = useContext(AuthContext);
+    useTitle("Registration");
 
     const onSubmitHandler = (event) => {
         event.preventDefault();

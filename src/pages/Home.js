@@ -1,9 +1,11 @@
 import React from 'react';
 import {NavLink, useLoaderData} from 'react-router-dom';
 import Banner from '../components/Banner';
+import useTitle from '../hooks/useTitle';
 
 const Home = () => {
     const services = useLoaderData();
+    useTitle("Home");
     return (
         <>
             {/* Banner Part */}

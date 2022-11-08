@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {AuthContext} from '../contexts/UserContext';
+import useTitle from '../hooks/useTitle';
 
 const AddService = () => {
+    useTitle("Add Service");
+    const {sweetAlertSuccess, sweetAlertFailed} = useContext(AuthContext);
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
@@ -22,8 +26,10 @@ const AddService = () => {
             body: JSON.stringify(service)
         }).then(() => {
             console.log('Service added successfully!!');
+            sweetAlertSuccess();
             form.reset();
         }).catch(err => {
+            sweetAlertFailed();
             console.log(err);
         });
     };

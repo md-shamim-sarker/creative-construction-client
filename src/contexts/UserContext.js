@@ -1,6 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
 import app from '../firebase/Firebase.config';
 import {createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from 'firebase/auth';
+import Swal from 'sweetalert2';
 
 const auth = getAuth(app);
 export const AuthContext = createContext();
@@ -51,6 +52,22 @@ const UserContext = ({children}) => {
         };
     }, []);
 
+    const sweetAlertSuccess = () => {
+        Swal.fire(
+            'Success!',
+            'Data added successfully!',
+            'success'
+        );
+    };
+
+    const sweetAlertFailed = () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+        });
+    };
+
     const authInfo = {
         user,
         setUser,
@@ -60,7 +77,9 @@ const UserContext = ({children}) => {
         signIn,
         logOut,
         signInWithGoogle,
-        signInWithFacebook
+        signInWithFacebook,
+        sweetAlertSuccess,
+        sweetAlertFailed
     };
 
     return (

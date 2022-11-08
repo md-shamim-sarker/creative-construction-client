@@ -1,8 +1,10 @@
 import React from 'react';
 import {NavLink, useLoaderData} from 'react-router-dom';
+import useTitle from '../hooks/useTitle';
 
 const Services = () => {
     const services = useLoaderData();
+    useTitle("Services");
     return (
         <div>
             <section
