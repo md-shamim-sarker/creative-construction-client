@@ -2,7 +2,6 @@ import React from 'react';
 import {NavLink, useLoaderData} from 'react-router-dom';
 import useTitle from '../hooks/useTitle';
 import {PhotoProvider, PhotoView} from 'react-photo-view';
-import 'react-photo-view/dist/react-photo-view.css';
 
 const Services = () => {
     const services = useLoaderData();

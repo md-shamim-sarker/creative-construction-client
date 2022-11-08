@@ -1,4 +1,5 @@
 import React from 'react';
+import {PhotoProvider, PhotoView} from 'react-photo-view';
 import {NavLink, useLoaderData} from 'react-router-dom';
 import Banner from '../components/Banner';
 import useTitle from '../hooks/useTitle';
@@ -20,7 +21,11 @@ const Home = () => {
                     services.map(service => <div
                         key={service._id}
                         className="border">
-                        <img src={service.thumbnail} alt="service_thumbnail" className='w-[500px] h-[300px]' />
+                        <PhotoProvider>
+                            <PhotoView src={service.image || service.thumbnail}>
+                                <img src={service.thumbnail} alt="service_thumbnail" className='w-[500px] h-[300px]' />
+                            </PhotoView>
+                        </PhotoProvider>
                         <div className='p-5 flex flex-col justify-between'>
                             <div>
                                 <h2 className='text-xl font-bold text-blue-800'>{service.title}</h2>
