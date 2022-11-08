@@ -1,11 +1,41 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {NavLink, useLoaderData} from 'react-router-dom';
 import {FaStar} from 'react-icons/fa';
 import useTitle from '../hooks/useTitle';
+import {AuthContext} from '../contexts/UserContext';
 
 const ServiceDetails = () => {
-    const {title, image, description, fields, price, rating} = useLoaderData();
+    const {user, sweetAlertSuccess, sweetAlertFailed} = useContext(AuthContext);
+    const {_id, title, image, description, fields, price, rating} = useLoaderData();
     useTitle("Service Details");
+
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const ratings = form.rating.value;
+        const review = form.review.value;
+        const serviceId = _id;
+        const email = user.email;
+        const reviewTime = Date();
+        const reviewObj = {ratings, review, serviceId, email, reviewTime};
+        console.log(reviewObj);
+
+        fetch('http://localhost:5000/reviews', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(reviewObj)
+        }).then(() => {
+            console.log('Service added successfully!!');
+            sweetAlertSuccess();
+            form.reset();
+        }).catch(err => {
+            sweetAlertFailed();
+            console.log(err);
+        });
+    };
+
     return (
         <div className='w-4/5 mx-auto mt-20 mb-18'>
             <h2 className='text-4xl font-bold text-center mb-5 text-blue-700'>{title}</h2>
@@ -41,6 +71,21 @@ const ServiceDetails = () => {
 
             <div className='w-4/5 mx-auto flex gap-x-1 mb-10'>
                 <NavLink to={"/login"} className="bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-md text-white">Write your own review</NavLink>
+            </div>
+
+            <div className={`w-4/5 mx-auto mb-10 ${user?.uid ? 'block' : 'hidden'}`}>
+                <form onSubmit={onSubmitHandler}>
+                    <select name="rating" className='block border'>
+                        <option value="0">---Ratings---</option>
+                        <option value="1">1 star</option>
+                        <option value="2">2 star</option>
+                        <option value="3">3 star</option>
+                        <option value="4">4 star</option>
+                        <option value="5">5 star</option>
+                    </select>
+                    <textarea name="review" className='border block w-full h-32 p-2 my-5' placeholder='Please, leave a review...'></textarea>
+                    <input type="submit" value="Submit" className="bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-md text-white" />
+                </form>
             </div>
         </div>
     );

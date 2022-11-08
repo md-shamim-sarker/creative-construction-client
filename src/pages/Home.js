@@ -7,6 +7,7 @@ import useTitle from '../hooks/useTitle';
 const Home = () => {
     const services = useLoaderData();
     useTitle("Home");
+
     return (
         <>
             {/* Banner Part */}
@@ -23,7 +24,7 @@ const Home = () => {
                         className="border">
                         <PhotoProvider>
                             <PhotoView src={service.image || service.thumbnail}>
-                                <img src={service.thumbnail} alt="service_thumbnail" className='w-[500px] h-[300px]' />
+                                <img src={service.thumbnail} alt="service_thumbnail" className='w-full lg:w-[500px] h-[300px]' />
                             </PhotoView>
                         </PhotoProvider>
                         <div className='p-5 flex flex-col justify-between'>
