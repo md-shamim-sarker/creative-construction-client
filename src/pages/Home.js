@@ -4,7 +4,6 @@ import Banner from '../components/Banner';
 
 const Home = () => {
     const services = useLoaderData();
-    // const {_id, title, thumbnail, price, description, rating} = services;
     return (
         <>
             {/* Banner Part */}
@@ -23,17 +22,17 @@ const Home = () => {
                         <div className='p-5 flex flex-col justify-between'>
                             <div>
                                 <h2 className='text-xl font-bold text-blue-800'>{service.title}</h2>
-                                <small>{service.description.substring(0, 100)}...</small>
+                                <small>{service.description.substring(0, 80)}...</small>
                                 <p className='text-blue-800 font-bold'>Ratings: {service.rating}</p>
-                                <p className='text-blue-800 font-bold'>Price: ${service.price}</p>
+                                <p className='text-blue-800 font-bold mb-5'>Price: ${service.price}</p>
                             </div>
-                            <NavLink to={"/"} className="bg-blue-700 hover:bg-blue-600 px-3 py-1 rounded-md text-white text-center">Service Details</NavLink>
+                            <NavLink to={`/service/${service._id}`} className="bg-blue-700 hover:bg-blue-600 px-3 py-1 rounded-md text-white text-center">Service Details</NavLink>
                         </div>
                     </div>)
                 }
             </div>
             <div className='flex justify-center mb-10'>
-                <NavLink to={"/"} className="bg-blue-700 hover:bg-blue-600 px-3 py-1 rounded-md text-white text-center">See More</NavLink>
+                <NavLink to={"/services"} className="bg-blue-700 hover:bg-blue-600 px-3 py-1 rounded-md text-white text-center">See All Services</NavLink>
             </div>
 
             {/* Hero Part */}
