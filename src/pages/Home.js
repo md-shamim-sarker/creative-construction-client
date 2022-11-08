@@ -1,12 +1,11 @@
-import React, {useContext} from 'react';
-import {AuthContext} from '../contexts/UserContext';
+import React from 'react';
+import Slider from '../components/Slider';
 
 const Home = () => {
-    const {myName} = useContext(AuthContext);
     return (
-        <div>
-            <h2>{myName}</h2>
-        </div>
+        <>
+            <Slider></Slider>
+        </>
     );
 };
 
