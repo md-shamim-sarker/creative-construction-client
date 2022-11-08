@@ -5,7 +5,7 @@ import useTitle from '../hooks/useTitle';
 
 const Registration = () => {
     const [message, setMessage] = useState("");
-    const {createUser, updateUser, logOut, setUser} = useContext(AuthContext);
+    const {createUser, updateUser, logOut, setUser, sweetAlertFailed, sweetAlertSuccess} = useContext(AuthContext);
     useTitle("Registration");
 
     const onSubmitHandler = (event) => {
@@ -34,10 +34,12 @@ const Registration = () => {
                 });
                 form.reset();
                 setMessage("Successfully Created Account.");
+                sweetAlertSuccess();
             })
             .catch((error) => {
                 console.log(error);
                 setMessage("This email already in use.");
+                sweetAlertFailed();
             });
     };
 

@@ -34,11 +34,11 @@ const Header = () => {
                 <NavLink to={"/my-reviews"} className='text-blue-900 hover:text-blue-600'>My Reviews</NavLink>
                 <NavLink to={"/add-service"} className='text-blue-900 hover:text-blue-600'>Add Service</NavLink>
             </div>
-            <div className='flex gap-x-2'>
+            <div className='flex gap-x-2 items-center'>
                 {
                     user?.uid
                         ? user?.photoURL
-                            ? <img src={user?.photoURL} alt="photoURL" className='w-8 h-8 rounded-full' title={user?.displayName} />
+                            ? <img src={user?.photoURL} alt="photoURL" className='w-9 h-9 rounded-full' title={user?.displayName} />
                             : <FaUser className='w-6 h-6 rounded-full border' title={user?.displayName}></FaUser>
                         : ""
                 }
@@ -46,10 +46,10 @@ const Header = () => {
                 {
                     user?.uid
                         ?
-                        <button onClick={logOutHandler} className="bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-md text-white">
+                        <button onClick={logOutHandler} className="bg-blue-700 hover:bg-blue-600 px-3 py-1 rounded-md text-white">
                             Log Out
                         </button>
-                        : <NavLink to={"/login"} className="bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-md text-white">Login</NavLink>
+                        : <NavLink to={"/login"} className="bg-blue-700 hover:bg-blue-600 px-3 py-1 rounded-md text-white">Login</NavLink>
                 }
             </div>
         </div>
