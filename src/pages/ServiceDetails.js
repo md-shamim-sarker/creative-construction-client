@@ -8,7 +8,7 @@ const ServiceDetails = () => {
     return (
         <div className='w-4/5 mx-auto mt-20 mb-18'>
             <h2 className='text-4xl font-bold text-center mb-5 text-blue-700'>{title}</h2>
-            <img src={image} alt="service_banner" />
+            <img src={image} alt="service_banner" className='w-[1366px] h-[500px]' />
             <div className='w-full flex justify-between'>
                 <h2 className='text-xl font-bold mb-5 text-blue-700 my-5'>Estimated Price: ${price}</h2>
                 <h2 className='text-lg font-bold mb-5 text-orange-500 my-5 flex items-center gap-x-2'>
@@ -20,7 +20,7 @@ const ServiceDetails = () => {
             <p>{description}</p>
             <h2 className='text-2xl font-bold mb-5 text-blue-700 my-5'>SERVICE AREA</h2>
             {
-                fields.map((field, index) => <li key={index} className="ml-10">{field}</li>)
+                fields?.map((field, index) => <li key={index} className="ml-10">{field}</li>)
             }
             <h2 className='text-3xl font-bold text-center mb-5 text-blue-700 my-5'>REVIEWS</h2>
             <div>

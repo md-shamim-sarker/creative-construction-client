@@ -18,7 +18,7 @@ const Home = () => {
                     services.map(service => <div
                         key={service._id}
                         className="border">
-                        <img src={service.thumbnail} alt="service_thumbnail" className='w-full' />
+                        <img src={service.thumbnail} alt="service_thumbnail" className='w-[500px] h-[300px]' />
                         <div className='p-5 flex flex-col justify-between'>
                             <div>
                                 <h2 className='text-xl font-bold text-blue-800'>{service.title}</h2>
