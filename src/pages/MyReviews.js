@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import {NavLink} from 'react-router-dom';
 import {AuthContext} from '../contexts/UserContext';
 import useTitle from '../hooks/useTitle';
 
@@ -52,6 +53,9 @@ const MyReviews = () => {
                                 Service Name
                             </th>
                             <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+                                Ratings
+                            </th>
+                            <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
                                 Review
                             </th>
                             <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
@@ -70,11 +74,12 @@ const MyReviews = () => {
                         {
                             reviews.map((review, index) => <tr key={review?._id}>
                                 <td className="px-4 py-2 font-medium text-gray-900">{index + 1}</td>
-                                <td className="px-4 py-2 text-gray-700">Service Name</td>
-                                <td className="px-4 py-2 text-gray-700">{review?.review.slice(0 - 25)}...</td>
+                                <td className="px-4 py-2 text-gray-700">{review?.serviceTitle}</td>
+                                <td className="px-4 py-2 text-gray-700">{review?.ratings}</td>
+                                <td className="px-4 py-2 text-gray-700">{review?.review.slice(0, 25)}...</td>
                                 <td className="px-4 py-2 text-gray-700">{review?.reviewTime.slice(3, 24)}</td>
                                 <td className="px-4 py-2 text-gray-700">
-                                    <button className="bg-green-700 hover:bg-green-600 px-3 py-1 rounded-md text-white">Update</button>
+                                    <NavLink to={`/update/${review?._id}`} className="bg-green-700 hover:bg-green-600 px-3 py-1 rounded-md text-white">Update</NavLink>
                                 </td>
                                 <td className="px-4 py-2 text-gray-700">
                                     <button onClick={() => handleDelete(review)} className="bg-red-700 hover:bg-red-600 px-3 py-1 rounded-md text-white">Delete</button>
