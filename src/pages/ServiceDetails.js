@@ -6,6 +6,7 @@ import {AuthContext} from '../contexts/UserContext';
 
 const ServiceDetails = () => {
     const [reviews, setReviews] = useState([]);
+    const [render, setRender] = useState(false);
     const {user, sweetAlertSuccess, sweetAlertFailed} = useContext(AuthContext);
     const {_id, title, image, description, fields, price, rating} = useLoaderData();
     useTitle("Service Details");
@@ -18,23 +19,7 @@ const ServiceDetails = () => {
                 setReviews(data);
             })
             .catch(err => console.log(err));
-
-        /* fetch('http://localhost:5000/reviews', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(service)
-        }).then(() => {
-            console.log('Service added successfully!!');
-            sweetAlertSuccess();
-            form.reset();
-        }).catch(err => {
-            sweetAlertFailed();
-            console.log(err);
-        }); */
-    }, [_id]);
-    console.log(reviews);
+    }, [_id, render]);
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
@@ -42,13 +27,14 @@ const ServiceDetails = () => {
         const ratings = form.rating.value;
         const review = form.review.value;
         const serviceId = _id;
+        const serviceTitle = title;
         const email = user.email;
         const reviewTime = Date();
         const photo = user.photoURL;
         const name = user.displayName;
-        const reviewObj = {ratings, review, serviceId, email, reviewTime, photo, name};
+        const reviewObj = {ratings, review, serviceId, email, reviewTime, photo, name, serviceTitle};
         console.log(reviewObj);
-
+        setRender(!render);
         fetch('http://localhost:5000/reviews', {
             method: 'POST',
             headers: {
@@ -83,13 +69,25 @@ const ServiceDetails = () => {
                 fields?.map((field, index) => <li key={index} className="ml-10">{field}</li>)
             }
             <h2 className='text-3xl font-bold text-center mb-5 text-blue-700 my-5'>REVIEWS</h2>
+
             {
                 reviews.map(review => <div key={review._id}>
                     <div className='flex items-center gap-x-2 w-4/5 mx-auto'>
-                        <img src={user?.photoURL} alt="profile_pic" className='w-10 h-10 rounded-full' />
-                        <h2 className='text-xl font-bold'>{user?.displayName}</h2>
+                        <img src={review?.photo} alt="profile_pic" className='w-10 h-10 rounded-full' />
+                        <div>
+                            <h2 className='text-xl font-bold'>{review?.name}</h2>
+                            <p className='flex items-center gap-x-2 flex-wrap text-xs'>
+                                <span>
+                                    Rating: {review?.ratings}
+                                </span>
+                                <span className='ml-[-0.3rem]'>
+                                    <FaStar className='text-orange-600'></FaStar>
+                                </span>
+                                <span>Date: {review?.reviewTime.slice(3, 24)}</span>
+                            </p>
+                        </div>
                     </div>
-                    <p className='w-4/5 mx-auto my-5'>{review?.review}</p>
+                    <p className='w-4/5 mx-auto my-5 ml-40'>{review?.review}</p>
                 </div>)
             }
 
