@@ -54,8 +54,8 @@ const UserContext = ({children}) => {
 
     const sweetAlertSuccess = () => {
         Swal.fire(
-            'Success!',
-            'Operation success!',
+            'Added',
+            'A Service Added To Database',
             'success'
         );
     };

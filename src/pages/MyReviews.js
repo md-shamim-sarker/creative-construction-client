@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {NavLink} from 'react-router-dom';
+import Swal from 'sweetalert2';
 import {AuthContext} from '../contexts/UserContext';
 import useTitle from '../hooks/useTitle';
 
@@ -10,7 +11,13 @@ const MyReviews = () => {
     const [reviews, setReviews] = useState([]);
     const [render, setRender] = useState(false);
 
-    console.log(reviews);
+    const deleteSuccess = () => {
+        Swal.fire(
+            'Deleted!',
+            'A Review Delete Successfully!',
+            'success'
+        );
+    };
 
     useEffect(() => {
         const url = `http://localhost:5000/reviews/services/email/${user?.email}`;
@@ -34,6 +41,7 @@ const MyReviews = () => {
                 setReviews(remainingReviews);
                 setRender(render);
                 console.log('A review is deleted successfully!!!');
+                deleteSuccess();
             });
     };
 

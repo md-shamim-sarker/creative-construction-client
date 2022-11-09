@@ -3,13 +3,22 @@ import {NavLink, useLoaderData} from 'react-router-dom';
 import {FaStar} from 'react-icons/fa';
 import useTitle from '../hooks/useTitle';
 import {AuthContext} from '../contexts/UserContext';
+import Swal from 'sweetalert2';
 
 const ServiceDetails = () => {
     const [reviews, setReviews] = useState([]);
     const [render, setRender] = useState(false);
-    const {user, sweetAlertSuccess, sweetAlertFailed} = useContext(AuthContext);
+    const {user, sweetAlertFailed} = useContext(AuthContext);
     const {_id, title, image, description, fields, price, rating} = useLoaderData();
     useTitle("Service Details");
+
+    const sweetAlertAddReview = () => {
+        Swal.fire(
+            'Thank You!',
+            'A Review Added Successfully!',
+            'success'
+        );
+    };
 
     useEffect(() => {
         const url = `http://localhost:5000/reviews/services/${_id}`;
@@ -42,8 +51,7 @@ const ServiceDetails = () => {
             },
             body: JSON.stringify(reviewObj)
         }).then(() => {
-            console.log('Service added successfully!!');
-            sweetAlertSuccess();
+            sweetAlertAddReview();
             form.reset();
         }).catch(err => {
             sweetAlertFailed();
@@ -91,9 +99,19 @@ const ServiceDetails = () => {
                 </div>)
             }
 
-
             <div className='w-4/5 mx-auto flex gap-x-1 mb-10'>
-                <NavLink to={"/login"} className="bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-md text-white">Write your own review</NavLink>
+                <h2 className='w-full my-5 text-xl font-bold text-center'>
+                    {
+                        user?.uid
+                            ? <span>
+                                Please add your review
+                            </span>
+                            : <span>
+                                If you want to add a review, please <NavLink to={"/login"} className='underline text-blue-700'>login</NavLink>
+                            </span>
+                    }
+
+                </h2>
             </div>
 
             <div className={`w-4/5 mx-auto mb-10 ${user?.uid ? 'block' : 'hidden'}`}>
@@ -106,7 +124,7 @@ const ServiceDetails = () => {
                         <option value="4">4 star</option>
                         <option value="5">5 star</option>
                     </select>
-                    <textarea name="review" className='border block w-full h-32 p-2 my-5' placeholder='Please, leave a review...'></textarea>
+                    <textarea name="review" className='border block w-full h-32 p-2 my-5' placeholder='Please, write a review...'></textarea>
                     <input type="submit" value="Submit" className="bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-md text-white" />
                 </form>
             </div>

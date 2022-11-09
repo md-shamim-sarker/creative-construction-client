@@ -1,9 +1,18 @@
 import React from 'react';
 import {useLoaderData, useNavigate} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const UpdateReviews = () => {
     const prevReview = useLoaderData();
     const navigate = useNavigate();
+
+    const updateSuccess = () => {
+        Swal.fire(
+            'Updated!',
+            'A Review Updated Successfully!',
+            'success'
+        );
+    };
 
     const onSubmitHandlerUpdate = (event) => {
         event.preventDefault();
@@ -17,6 +26,7 @@ const UpdateReviews = () => {
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(updatedReview)
         }).then(() => {
+            updateSuccess();
             navigate(`/my-reviews`);
         }).catch(err => console.log(err));
     };
