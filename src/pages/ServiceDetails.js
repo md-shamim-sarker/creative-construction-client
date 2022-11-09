@@ -1,13 +1,40 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {NavLink, useLoaderData} from 'react-router-dom';
 import {FaStar} from 'react-icons/fa';
 import useTitle from '../hooks/useTitle';
 import {AuthContext} from '../contexts/UserContext';
 
 const ServiceDetails = () => {
+    const [reviews, setReviews] = useState([]);
     const {user, sweetAlertSuccess, sweetAlertFailed} = useContext(AuthContext);
     const {_id, title, image, description, fields, price, rating} = useLoaderData();
     useTitle("Service Details");
+
+    useEffect(() => {
+        const url = `http://localhost:5000/reviews/services/${_id}`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                setReviews(data);
+            })
+            .catch(err => console.log(err));
+
+        /* fetch('http://localhost:5000/reviews', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(service)
+        }).then(() => {
+            console.log('Service added successfully!!');
+            sweetAlertSuccess();
+            form.reset();
+        }).catch(err => {
+            sweetAlertFailed();
+            console.log(err);
+        }); */
+    }, [_id]);
+    console.log(reviews);
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
@@ -17,7 +44,9 @@ const ServiceDetails = () => {
         const serviceId = _id;
         const email = user.email;
         const reviewTime = Date();
-        const reviewObj = {ratings, review, serviceId, email, reviewTime};
+        const photo = user.photoURL;
+        const name = user.displayName;
+        const reviewObj = {ratings, review, serviceId, email, reviewTime, photo, name};
         console.log(reviewObj);
 
         fetch('http://localhost:5000/reviews', {
@@ -54,20 +83,16 @@ const ServiceDetails = () => {
                 fields?.map((field, index) => <li key={index} className="ml-10">{field}</li>)
             }
             <h2 className='text-3xl font-bold text-center mb-5 text-blue-700 my-5'>REVIEWS</h2>
-            <div>
-                <div className='flex items-center gap-x-2 w-4/5 mx-auto'>
-                    <img src="https://avatarfiles.alphacoders.com/837/thumb-83705.png" alt="profile_pic" className='w-10 h-10 rounded-full' />
-                    <h2 className='text-xl font-bold'>Profile Name</h2>
-                </div>
-                <p className='w-4/5 mx-auto my-5'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum, blanditiis! Facere esse aperiam soluta dolorum amet laboriosam odit tempore. Illo, quia? Deserunt molestiae amet laudantium vel soluta cupiditate eos assumenda accusantium tempore? Perspiciatis voluptates expedita alias similique eligendi. Non at minus temporibus odio eos? Sequi neque ut, consequuntur numquam asperiores, quibusdam quo nobis harum soluta ratione reiciendis illo laborum? Cum eum magni rem sit. Eius quas ea laboriosam velit officia animi qui architecto ullam laudantium, quam pariatur et autem ratione mollitia libero quae nisi quasi aspernatur hic laborum saepe earum consequatur! Consequuntur est temporibus cupiditate numquam illo maxime, neque repellat.</p>
-            </div>
-            <div>
-                <div className='flex items-center gap-x-2 w-4/5 mx-auto'>
-                    <img src="https://avatarfiles.alphacoders.com/837/thumb-83705.png" alt="profile_pic" className='w-10 h-10 rounded-full' />
-                    <h2 className='text-xl font-bold'>Profile Name</h2>
-                </div>
-                <p className='w-4/5 mx-auto my-5'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum, blanditiis! Facere esse aperiam soluta dolorum amet laboriosam odit tempore. Illo, quia? Deserunt molestiae amet laudantium vel soluta cupiditate eos assumenda accusantium tempore? Perspiciatis voluptates expedita alias similique eligendi. Non at minus temporibus odio eos? Sequi neque ut, consequuntur numquam asperiores, quibusdam quo nobis harum soluta ratione reiciendis illo laborum? Cum eum magni rem sit. Eius quas ea laboriosam velit officia animi qui architecto ullam laudantium, quam pariatur et autem ratione mollitia libero quae nisi quasi aspernatur hic laborum saepe earum consequatur! Consequuntur est temporibus cupiditate numquam illo maxime, neque repellat.</p>
-            </div>
+            {
+                reviews.map(review => <div key={review._id}>
+                    <div className='flex items-center gap-x-2 w-4/5 mx-auto'>
+                        <img src={user?.photoURL} alt="profile_pic" className='w-10 h-10 rounded-full' />
+                        <h2 className='text-xl font-bold'>{user?.displayName}</h2>
+                    </div>
+                    <p className='w-4/5 mx-auto my-5'>{review?.review}</p>
+                </div>)
+            }
+
 
             <div className='w-4/5 mx-auto flex gap-x-1 mb-10'>
                 <NavLink to={"/login"} className="bg-blue-700 hover:bg-blue-600 px-3 py-2 rounded-md text-white">Write your own review</NavLink>

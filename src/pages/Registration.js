@@ -32,6 +32,7 @@ const Registration = () => {
                 }).catch((error) => {
                     console.log(error);
                 });
+
                 form.reset();
                 setMessage("Successfully Created Account.");
                 sweetAlertSuccess();

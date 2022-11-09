@@ -60,7 +60,7 @@ const Services = () => {
                                 <p className='text-blue-800 font-bold'>Ratings: {service.rating}</p>
                                 <p className='text-blue-800 font-bold mb-5'>Price: ${service.price}</p>
                             </div>
-                            <NavLink to={`/service/${service._id}`} className="bg-blue-700 hover:bg-blue-600 px-3 py-1 rounded-md text-white text-center">Service Details</NavLink>
+                            <NavLink to={`/services/${service._id}`} className="bg-blue-700 hover:bg-blue-600 px-3 py-1 rounded-md text-white text-center">Service Details</NavLink>
                         </div>
                     </div>)
                 }

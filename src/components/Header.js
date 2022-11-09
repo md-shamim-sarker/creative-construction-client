@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {FaBars, FaUser} from 'react-icons/fa';
+import {FaBars} from 'react-icons/fa';
 import {GrClose} from 'react-icons/gr';
 import {NavLink} from 'react-router-dom';
 import logo from '../assets/logo.jpg';
@@ -37,16 +37,18 @@ const Header = () => {
                 <NavLink to={"/"} className='text-blue-900 hover:text-blue-600'>Home</NavLink>
                 <NavLink to={"/services"} className='text-blue-900 hover:text-blue-600'>Services</NavLink>
                 <NavLink to={"/blog"} className='text-blue-900 hover:text-blue-600'>Blog</NavLink>
-                <NavLink to={"/my-reviews"} className='text-blue-900 hover:text-blue-600'>My Reviews</NavLink>
-                <NavLink to={"/add-service"} className='text-blue-900 hover:text-blue-600'>Add Service</NavLink>
+                {
+                    user?.email && <>
+                        <NavLink to={"/my-reviews"} className='text-blue-900 hover:text-blue-600'>My Reviews</NavLink>
+                        <NavLink to={"/add-service"} className='text-blue-900 hover:text-blue-600'>Add Service</NavLink>
+                    </>
+                }
             </div>
             <div className='flex gap-x-2 items-center'>
                 {
                     user?.uid
-                        ? user?.photoURL
-                            ? <img src={user?.photoURL} alt="photoURL" className='w-9 h-9 rounded-full' title={user?.displayName} />
-                            : <FaUser className='w-6 h-6 rounded-full border' title={user?.displayName}></FaUser>
-                        : ""
+                    // && user?.photoURL
+                    && <img src={user?.photoURL} alt="photoURL" className='w-9 h-9 rounded-full' title={user?.displayName} />
                 }
 
                 {
@@ -69,8 +71,12 @@ const Header = () => {
                 <NavLink to={"/"} className='text-blue-900 hover:text-blue-600'>Home</NavLink>
                 <NavLink to={"/services"} className='text-blue-900 hover:text-blue-600'>Services</NavLink>
                 <NavLink to={"/blog"} className='text-blue-900 hover:text-blue-600'>Blog</NavLink>
-                <NavLink to={"/my-reviews"} className='text-blue-900 hover:text-blue-600'>My Reviews</NavLink>
-                <NavLink to={"/add-service"} className='text-blue-900 hover:text-blue-600'>Add Service</NavLink>
+                {
+                    user?.email && <>
+                        <NavLink to={"/my-reviews"} className='text-blue-900 hover:text-blue-600'>My Reviews</NavLink>
+                        <NavLink to={"/add-service"} className='text-blue-900 hover:text-blue-600'>Add Service</NavLink>
+                    </>
+                }
             </div>
         </div>
     );
