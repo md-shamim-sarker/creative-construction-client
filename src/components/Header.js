@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {FaBars} from 'react-icons/fa';
+import {FaBars, FaUser} from 'react-icons/fa';
 import {GrClose} from 'react-icons/gr';
 import {NavLink} from 'react-router-dom';
 import logo from '../assets/logo.jpg';
@@ -47,8 +47,10 @@ const Header = () => {
             <div className='flex gap-x-2 items-center'>
                 {
                     user?.uid
-                    // && user?.photoURL
-                    && <img src={user?.photoURL} alt="photoURL" className='w-9 h-9 rounded-full' title={user?.displayName} />
+                        ? user?.photoURL
+                            ? <img src={user?.photoURL} alt="photoURL" className='w-9 h-9 rounded-full' title={user?.displayName} />
+                            : <FaUser className='w-8 h-8 border bg-white text-black rounded-full' title={user?.displayName}></FaUser>
+                        : ""
                 }
 
                 {
