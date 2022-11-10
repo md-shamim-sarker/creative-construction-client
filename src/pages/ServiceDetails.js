@@ -8,8 +8,9 @@ import Swal from 'sweetalert2';
 const ServiceDetails = () => {
     const [reviews, setReviews] = useState([]);
     const [render, setRender] = useState(false);
+    const [avgRating, setAvgRating] = useState(0);
     const {user, sweetAlertFailed} = useContext(AuthContext);
-    const {_id, title, image, description, fields, price, rating} = useLoaderData();
+    const {_id, title, image, description, fields, price} = useLoaderData();
     useTitle("Service Details");
 
     const sweetAlertAddReview = () => {
@@ -26,6 +27,10 @@ const ServiceDetails = () => {
             .then(res => res.json())
             .then(data => {
                 setReviews(data);
+                const totalRatings = data.reduce((previous, current) => Number(previous) + Number(current.ratings), 0);
+                const length = data.length;
+                const serviceRatings = (totalRatings / length).toFixed(1);
+                setAvgRating(serviceRatings);
             })
             .catch(err => console.log(err));
     }, [_id, render]);
@@ -42,7 +47,6 @@ const ServiceDetails = () => {
         const photo = user.photoURL;
         const name = user.displayName;
         const reviewObj = {ratings, review, serviceId, email, reviewTime, photo, name, serviceTitle};
-        setRender(!render);
         fetch('https://creative-construction-three.vercel.app/reviews', {
             method: 'POST',
             headers: {
@@ -51,6 +55,7 @@ const ServiceDetails = () => {
             body: JSON.stringify(reviewObj)
         }).then(() => {
             sweetAlertAddReview();
+            setRender(!render);
             form.reset();
         }).catch(err => {
             sweetAlertFailed();
@@ -59,13 +64,13 @@ const ServiceDetails = () => {
     };
 
     return (
-        <div className='w-4/5 mx-auto mt-20 mb-18'>
+        <div className='w-11/12 lg:w-4/5 mx-auto mt-20 mb-18'>
             <h2 className='text-4xl font-bold text-center mb-5 text-blue-700'>{title}</h2>
-            <img src={image} alt="service_banner" className='w-[1366px] h-[500px]' />
+            <img src={image} alt="service_banner" className='w-full lg:w-[1366px] lg:h-[500px]' />
             <div className='w-full flex justify-between'>
-                <h2 className='text-xl font-bold mb-5 text-blue-700 my-5'>Estimated Price: ${price}</h2>
+                <h2 className='text-xl font-bold mb-5 text-blue-700 my-5'>Price: ${price}</h2>
                 <h2 className='text-lg font-bold mb-5 text-orange-500 my-5 flex items-center gap-x-2'>
-                    <span>Ratings: {rating}</span>
+                    <span>Ratings: {avgRating > 0 ? avgRating : 0}</span>
                     <FaStar></FaStar>
                 </h2>
             </div>
@@ -79,7 +84,7 @@ const ServiceDetails = () => {
 
             {
                 reviews.map(review => <div key={review._id}>
-                    <div className='flex items-center gap-x-2 w-4/5 mx-auto'>
+                    <div className='flex items-center gap-x-2'>
                         <img src={review?.photo} alt="profile_pic" className='w-10 h-10 rounded-full' />
                         <div>
                             <h2 className='text-xl font-bold'>{review?.name}</h2>
@@ -87,14 +92,14 @@ const ServiceDetails = () => {
                                 <span>
                                     Rating: {review?.ratings}
                                 </span>
-                                <span className='ml-[-0.3rem]'>
+                                <span className=''>
                                     <FaStar className='text-orange-600'></FaStar>
                                 </span>
                                 <span>Date: {review?.reviewTime.slice(3, 24)}</span>
                             </p>
                         </div>
                     </div>
-                    <p className='w-4/5 mx-auto my-5 ml-40'>{review?.review}</p>
+                    <p className='pl-12 mx-auto mt-3 mb-5'>{review?.review}</p>
                 </div>)
             }
 

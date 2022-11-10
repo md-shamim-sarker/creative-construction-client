@@ -44,7 +44,7 @@ const Registration = () => {
     };
 
     return (
-        <div className='w-full flex justify-center'>
+        <div className='w-11/12 mx-auto flex justify-center'>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl mt-28 mb-16 border bg-blue-100">
                 <h1 className="text-2xl font-bold text-center">Register</h1>
 

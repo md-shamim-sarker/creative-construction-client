@@ -33,7 +33,7 @@ const AddService = () => {
     };
 
     return (
-        <div className='w-full flex justify-center'>
+        <div className='w-11/12 mx-auto flex justify-center'>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl mt-28 mb-16 border bg-blue-100">
                 <h1 className="text-2xl font-bold text-center">Add New Service</h1>
 
@@ -46,12 +46,12 @@ const AddService = () => {
                     </div>
 
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="thumbnail" className="block">Thumbnail URL (Recommended Size: 500x500px)<span className='text-red-700'>*</span></label>
+                        <label htmlFor="thumbnail" className="block">Thumbnail URL<span className='text-red-700'>*</span></label>
                         <input type="text" name="thumbnail" placeholder="Thumbnail URL" className="w-full px-4 py-3 rounded-md" required />
                     </div>
 
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="image" className="block">Image URL (Recommended Size: 1366x500px)<span className='text-red-700'>*</span></label>
+                        <label htmlFor="image" className="block">Image URL<span className='text-red-700'>*</span></label>
                         <input type="text" name="image" placeholder="Image URL" className="w-full px-4 py-3 rounded-md" required />
                     </div>
 

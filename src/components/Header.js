@@ -7,7 +7,7 @@ import {AuthContext} from '../contexts/UserContext';
 
 const Header = () => {
     const {user, logOut, setUser} = useContext(AuthContext);
-    const [toggle, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(true);
 
     const logOutHandler = () => {
         logOut()
@@ -34,13 +34,13 @@ const Header = () => {
                 </div>
             </NavLink>
             <div className='hidden lg:flex gap-x-3 font-bold'>
-                <NavLink to={"/"} className='text-blue-900 hover:text-blue-600'>Home</NavLink>
-                <NavLink to={"/services"} className='text-blue-900 hover:text-blue-600'>Services</NavLink>
-                <NavLink to={"/blog"} className='text-blue-900 hover:text-blue-600'>Blog</NavLink>
+                <NavLink to={"/"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>Home</NavLink>
+                <NavLink to={"/services"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>Services</NavLink>
+                <NavLink to={"/blog"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>Blog</NavLink>
                 {
                     user?.email && <>
-                        <NavLink to={"/my-reviews"} className='text-blue-900 hover:text-blue-600'>My Reviews</NavLink>
-                        <NavLink to={"/add-service"} className='text-blue-900 hover:text-blue-600'>Add Service</NavLink>
+                        <NavLink to={"/my-reviews"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>My Reviews</NavLink>
+                        <NavLink to={"/add-service"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>Add Service</NavLink>
                     </>
                 }
             </div>
@@ -70,13 +70,13 @@ const Header = () => {
             {/* For Mobile Device */}
 
             <div className={`flex flex-col gap-y-5 font-bold lg:hidden fixed bg-blue-100 top-16 right-0 px-10 py-5 ${toggle ? 'hidden' : 'block'}`} onClick={toggleHandler}>
-                <NavLink to={"/"} className='text-blue-900 hover:text-blue-600'>Home</NavLink>
-                <NavLink to={"/services"} className='text-blue-900 hover:text-blue-600'>Services</NavLink>
-                <NavLink to={"/blog"} className='text-blue-900 hover:text-blue-600'>Blog</NavLink>
+                <NavLink to={"/"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>Home</NavLink>
+                <NavLink to={"/services"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>Services</NavLink>
+                <NavLink to={"/blog"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>Blog</NavLink>
                 {
                     user?.email && <>
-                        <NavLink to={"/my-reviews"} className='text-blue-900 hover:text-blue-600'>My Reviews</NavLink>
-                        <NavLink to={"/add-service"} className='text-blue-900 hover:text-blue-600'>Add Service</NavLink>
+                        <NavLink to={"/my-reviews"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>My Reviews</NavLink>
+                        <NavLink to={"/add-service"} className={({isActive}) => isActive ? 'text-red-700' : 'text-blue-800'}>Add Service</NavLink>
                     </>
                 }
             </div>
