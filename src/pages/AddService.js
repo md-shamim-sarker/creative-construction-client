@@ -16,7 +16,6 @@ const AddService = () => {
         const description = form.description.value;
         const rating = 0;
         const service = {title, thumbnail, image, price, description, rating};
-        console.log(service);
 
         fetch('http://localhost:5000/services', {
             method: 'POST',
@@ -25,7 +24,6 @@ const AddService = () => {
             },
             body: JSON.stringify(service)
         }).then(() => {
-            console.log('Service added successfully!!');
             sweetAlertSuccess();
             form.reset();
         }).catch(err => {

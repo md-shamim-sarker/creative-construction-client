@@ -17,8 +17,7 @@ const Registration = () => {
         const password = form.password.value;
         createUser(email, password)
             .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user);
+                // const user = userCredential.user;
                 updateUser({
                     displayName: fullName,
                     photoURL: photoURL

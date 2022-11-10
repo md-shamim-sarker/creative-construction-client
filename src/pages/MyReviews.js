@@ -30,7 +30,6 @@ const MyReviews = () => {
             })
             .then(data => {
                 setReviews(data);
-                console.log(data);
             })
             .catch(err => console.log(err));
     }, [render, user?.email]);
@@ -45,7 +44,6 @@ const MyReviews = () => {
                 const remainingReviews = reviews.filter(rev => rev._id !== review._id);
                 setReviews(remainingReviews);
                 setRender(render);
-                console.log('A review is deleted successfully!!!');
                 deleteSuccess();
             });
     };

@@ -42,7 +42,6 @@ const ServiceDetails = () => {
         const photo = user.photoURL;
         const name = user.displayName;
         const reviewObj = {ratings, review, serviceId, email, reviewTime, photo, name, serviceTitle};
-        console.log(reviewObj);
         setRender(!render);
         fetch('http://localhost:5000/reviews', {
             method: 'POST',

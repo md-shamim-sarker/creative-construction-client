@@ -11,7 +11,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname;
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
@@ -25,7 +25,6 @@ const Login = () => {
                 const currentUser = {
                     email: user.email
                 };
-                console.log(currentUser);
 
                 // get jwt token
                 fetch('http://localhost:5000/jwt', {
@@ -37,9 +36,12 @@ const Login = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
                         localStorage.setItem('token', data.token);
-                        navigate(from, {replace: true});
+                        if(from) {
+                            navigate(from, {replace: true});
+                        } else {
+                            window.history.back();
+                        }
                         form.reset();
                     });
             }).catch((error) => {
@@ -55,7 +57,6 @@ const Login = () => {
                 const currentUser = {
                     email: user.email
                 };
-                console.log(currentUser);
 
                 // get jwt token
                 fetch('http://localhost:5000/jwt', {
@@ -67,9 +68,12 @@ const Login = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
                         localStorage.setItem('token', data.token);
-                        navigate(from, {replace: true});
+                        if(from) {
+                            navigate(from, {replace: true});
+                        } else {
+                            window.history.back();
+                        }
                     });
             }).catch((error) => {
                 console.log(error);
@@ -80,11 +84,9 @@ const Login = () => {
         signInWithFacebook()
             .then((result) => {
                 const user = result.user;
-                console.log(user);
                 const currentUser = {
                     email: user.email
                 };
-                console.log(currentUser);
 
                 // get jwt token
                 fetch('http://localhost:5000/jwt', {
@@ -96,9 +98,12 @@ const Login = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
                         localStorage.setItem('token', data.token);
-                        navigate(from, {replace: true});
+                        if(from) {
+                            navigate(from, {replace: true});
+                        } else {
+                            window.history.back();
+                        }
                     });
             }).catch((error) => {
                 console.log(error);

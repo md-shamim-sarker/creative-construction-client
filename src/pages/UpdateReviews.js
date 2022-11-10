@@ -20,7 +20,6 @@ const UpdateReviews = () => {
         const ratings = form.rating.value;
         const review = form.review.value;
         const updatedReview = {ratings, review};
-        console.log(updatedReview);
         fetch(`http://localhost:5000/reviews/${prevReview._id}`, {
             method: 'PUT',
             headers: {'content-type': 'application/json'},
