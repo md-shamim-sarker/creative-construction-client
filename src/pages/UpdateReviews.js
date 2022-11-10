@@ -20,7 +20,7 @@ const UpdateReviews = () => {
         const ratings = form.rating.value;
         const review = form.review.value;
         const updatedReview = {ratings, review};
-        fetch(`http://localhost:5000/reviews/${prevReview._id}`, {
+        fetch(`https://creative-construction-three.vercel.app/reviews/${prevReview._id}`, {
             method: 'PUT',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(updatedReview)

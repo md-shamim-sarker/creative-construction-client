@@ -21,7 +21,7 @@ const ServiceDetails = () => {
     };
 
     useEffect(() => {
-        const url = `http://localhost:5000/reviews/services/${_id}`;
+        const url = `https://creative-construction-three.vercel.app/reviews/services/${_id}`;
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -43,7 +43,7 @@ const ServiceDetails = () => {
         const name = user.displayName;
         const reviewObj = {ratings, review, serviceId, email, reviewTime, photo, name, serviceTitle};
         setRender(!render);
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://creative-construction-three.vercel.app/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

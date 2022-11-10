@@ -20,17 +20,17 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                loader: () => fetch("http://localhost:5000/services3"),
+                loader: () => fetch("https://creative-construction-three.vercel.app/services3"),
                 element: <Home></Home>
             },
             {
                 path: "/services",
-                loader: () => fetch("http://localhost:5000/services"),
+                loader: () => fetch("https://creative-construction-three.vercel.app/services"),
                 element: <Services></Services>
             },
             {
                 path: "/services/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`),
+                loader: ({params}) => fetch(`https://creative-construction-three.vercel.app/services/${params.id}`),
                 element: <ServiceDetails></ServiceDetails>
             },
             {
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/update/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/reviews/${params.id}`),
+                loader: ({params}) => fetch(`https://creative-construction-three.vercel.app/reviews/${params.id}`),
                 element: <UpdateReviews></UpdateReviews>
             },
         ],

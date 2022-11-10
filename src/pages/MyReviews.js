@@ -20,7 +20,7 @@ const MyReviews = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews/services/email/${user?.email}`, {
+        fetch(`https://creative-construction-three.vercel.app/reviews/services/email/${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -36,7 +36,7 @@ const MyReviews = () => {
 
     // Delete Review
     const handleDelete = review => {
-        fetch(`http://localhost:5000/reviews/${review._id}`, {
+        fetch(`https://creative-construction-three.vercel.app/reviews/${review._id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

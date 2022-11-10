@@ -17,7 +17,7 @@ const AddService = () => {
         const rating = 0;
         const service = {title, thumbnail, image, price, description, rating};
 
-        fetch('http://localhost:5000/services', {
+        fetch('https://creative-construction-three.vercel.app/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
