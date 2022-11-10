@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import {FaUser} from 'react-icons/fa';
 import {NavLink} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {AuthContext} from '../contexts/UserContext';
@@ -51,7 +52,12 @@ const MyReviews = () => {
     return (
         <div className="w-4/5 mx-auto mt-32 mb-20">
             <div className='w-full flex flex-col items-center mb-5'>
-                <img src={photoURL} alt="user_photo" className='rounded-2xl w-40 h-40' />
+                {
+                    photoURL
+                        ? <img src={photoURL} alt="user_photo" className='rounded-2xl w-40 h-40' />
+                        : <FaUser className='border bg-white text-black rounded-2xl w-40 h-40' title={user?.displayName}></FaUser>
+                }
+
                 <h2 className='text-3xl font-bold'>{displayName}</h2>
                 <p>Email: {email}</p>
             </div>
