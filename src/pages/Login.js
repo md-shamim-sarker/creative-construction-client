@@ -8,7 +8,6 @@ const Login = () => {
     useTitle("Login");
     const [message, setMessage] = useState("");
     const {signIn, signInWithGoogle, signInWithFacebook, path} = useContext(AuthContext);
-    console.log(path);
 
     const navigate = useNavigate();
     const location = useLocation();
