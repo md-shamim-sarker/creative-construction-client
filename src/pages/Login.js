@@ -65,11 +65,7 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
-                        // if(from) {
                         navigate(from, {replace: true});
-                        // } else {
-                        //     window.history.back();
-                        // }
                     });
             }).catch((error) => {
                 console.log(error);
@@ -95,11 +91,7 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
-                        // if(from) {
                         navigate(from, {replace: true});
-                        // } else {
-                        //     window.history.back();
-                        // }
                     });
             }).catch((error) => {
                 console.log(error);
