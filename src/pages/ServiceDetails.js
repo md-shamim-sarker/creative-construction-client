@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {NavLink, useLoaderData, useLocation} from 'react-router-dom';
-import {FaStar} from 'react-icons/fa';
+import {FaStar, FaUser} from 'react-icons/fa';
 import useTitle from '../hooks/useTitle';
 import {AuthContext} from '../contexts/UserContext';
 import Swal from 'sweetalert2';
@@ -89,7 +89,12 @@ const ServiceDetails = () => {
             {
                 reviews.map(review => <div key={review._id}>
                     <div className='flex items-center gap-x-2'>
-                        <img src={review?.photo} alt="profile_pic" className='w-10 h-10 rounded-full' />
+                        {
+                            review?.photo
+                                ? <img src={review?.photo} alt="profile_pic" className='w-10 h-10 rounded-full' />
+                                : <FaUser className='w-8 h-8 border bg-white text-black rounded-full' title={user?.displayName}></FaUser>
+
+                        }
                         <div>
                             <h2 className='text-xl font-bold'>{review?.name}</h2>
                             <p className='flex items-center gap-x-2 flex-wrap text-xs'>
