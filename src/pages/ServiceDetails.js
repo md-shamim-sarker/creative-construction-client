@@ -1,15 +1,17 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {NavLink, useLoaderData} from 'react-router-dom';
+import {NavLink, useLoaderData, useLocation} from 'react-router-dom';
 import {FaStar} from 'react-icons/fa';
 import useTitle from '../hooks/useTitle';
 import {AuthContext} from '../contexts/UserContext';
 import Swal from 'sweetalert2';
 
 const ServiceDetails = () => {
+    const location = useLocation();
+
     const [reviews, setReviews] = useState([]);
     const [render, setRender] = useState(false);
     const [avgRating, setAvgRating] = useState(0);
-    const {user, sweetAlertFailed} = useContext(AuthContext);
+    const {user, sweetAlertFailed, setPath} = useContext(AuthContext);
     const {_id, title, image, description, fields, price} = useLoaderData();
     useTitle("Service Details");
 
@@ -33,7 +35,9 @@ const ServiceDetails = () => {
                 setAvgRating(serviceRatings);
             })
             .catch(err => console.log(err));
-    }, [_id, render]);
+
+        setPath(location.pathname);
+    }, [_id, render, location.pathname, setPath]);
 
     const onSubmitHandler = (event) => {
         event.preventDefault();

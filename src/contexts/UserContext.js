@@ -9,6 +9,7 @@ export const AuthContext = createContext();
 const UserContext = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [path, setPath] = useState('/');
 
     const googleProvider = new GoogleAuthProvider();
     const facebookProvider = new FacebookAuthProvider();
@@ -79,7 +80,9 @@ const UserContext = ({children}) => {
         signInWithGoogle,
         signInWithFacebook,
         sweetAlertSuccess,
-        sweetAlertFailed
+        sweetAlertFailed,
+        path,
+        setPath
     };
 
     return (

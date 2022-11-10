@@ -7,11 +7,12 @@ import useTitle from '../hooks/useTitle';
 const Login = () => {
     useTitle("Login");
     const [message, setMessage] = useState("");
-    const {signIn, signInWithGoogle, signInWithFacebook} = useContext(AuthContext);
+    const {signIn, signInWithGoogle, signInWithFacebook, path} = useContext(AuthContext);
+    console.log(path);
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname;
+    const from = location.state?.from?.pathname || path;
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
@@ -37,11 +38,7 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
-                        if(from) {
-                            navigate(from, {replace: true});
-                        } else {
-                            window.history.back();
-                        }
+                        navigate(from, {replace: true});
                         form.reset();
                     });
             }).catch((error) => {
@@ -69,11 +66,11 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
-                        if(from) {
-                            navigate(from, {replace: true});
-                        } else {
-                            window.history.back();
-                        }
+                        // if(from) {
+                        navigate(from, {replace: true});
+                        // } else {
+                        //     window.history.back();
+                        // }
                     });
             }).catch((error) => {
                 console.log(error);
@@ -99,11 +96,11 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem('token', data.token);
-                        if(from) {
-                            navigate(from, {replace: true});
-                        } else {
-                            window.history.back();
-                        }
+                        // if(from) {
+                        navigate(from, {replace: true});
+                        // } else {
+                        //     window.history.back();
+                        // }
                     });
             }).catch((error) => {
                 console.log(error);

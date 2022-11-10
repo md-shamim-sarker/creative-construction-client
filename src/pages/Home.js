@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {PhotoProvider, PhotoView} from 'react-photo-view';
-import {NavLink, useLoaderData} from 'react-router-dom';
+import {NavLink, useLoaderData, useLocation} from 'react-router-dom';
 import Banner from '../components/Banner';
+import {AuthContext} from '../contexts/UserContext';
 import useTitle from '../hooks/useTitle';
 
 const Home = () => {
     const services = useLoaderData();
     useTitle("Home");
+    const location = useLocation();
+    const {setPath} = useContext(AuthContext);
+
+    useEffect(() => {
+        setPath(location.pathname);
+    }, [setPath, location.pathname]);
 
     return (
         <>
