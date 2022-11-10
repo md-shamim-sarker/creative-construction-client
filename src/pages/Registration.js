@@ -51,27 +51,27 @@ const Registration = () => {
                 <form onSubmit={onSubmitHandler} className="space-y-6 ng-untouched ng-pristine ng-valid" data-bitwarden-watching="1">
 
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="fullName" className="block">Full Name</label>
-                        <input type="text" name="fullName" placeholder="Full Name" className="w-full px-4 py-3 rounded-md" />
+                        <label htmlFor="fullName" className="block">Full Name (Required)</label>
+                        <input type="text" name="fullName" placeholder="Full Name" className="w-full px-4 py-3 rounded-md" required />
                     </div>
 
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="photoURL" className="block">Photo URL</label>
+                        <label htmlFor="photoURL" className="block">Photo URL (Optional)</label>
                         <input type="text" name="photoURL" placeholder="Photo URL" className="w-full px-4 py-3 rounded-md" />
                     </div>
 
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="email" className="block">Email</label>
-                        <input type="email" name="email" placeholder="Email" className="w-full px-4 py-3 rounded-md" />
+                        <label htmlFor="email" className="block">Email (Required)</label>
+                        <input type="email" name="email" placeholder="Email" className="w-full px-4 py-3 rounded-md" required />
                     </div>
 
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="password" className="block">Password</label>
-                        <input type="password" name="password" placeholder="Password" className="w-full px-4 py-3 rounded-md" />
+                        <label htmlFor="password" className="block">Password (Required)</label>
+                        <input type="password" name="password" placeholder="Password" className="w-full px-4 py-3 rounded-md" required />
                     </div>
 
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="confirmPassword" className="block">Confirm Password</label>
+                        <label htmlFor="confirmPassword" className="block">Confirm Password (Optional)</label>
                         <input type="password" name="confirmPassword" placeholder="Confirm Password" className="w-full px-4 py-3 rounded-md" />
                     </div>
                     <div>{message}</div>
