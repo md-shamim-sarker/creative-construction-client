@@ -20,9 +20,14 @@ const MyReviews = () => {
     };
 
     useEffect(() => {
-        const url = `http://localhost:5000/reviews/services/email/${user?.email}`;
-        fetch(url)
-            .then(res => res.json())
+        fetch(`http://localhost:5000/reviews/services/email/${user?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => {
+                return res.json();
+            })
             .then(data => {
                 setReviews(data);
                 console.log(data);

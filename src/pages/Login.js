@@ -18,12 +18,30 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+
         signIn(email, password)
             .then((result) => {
                 const user = result.user;
-                console.log(user);
-                form.reset();
-                navigate(from, {replace: true});
+                const currentUser = {
+                    email: user.email
+                };
+                console.log(currentUser);
+
+                // get jwt token
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem('token', data.token);
+                        navigate(from, {replace: true});
+                        form.reset();
+                    });
             }).catch((error) => {
                 setMessage(error.message);
             });
@@ -33,8 +51,26 @@ const Login = () => {
         signInWithGoogle()
             .then((result) => {
                 const user = result.user;
-                console.log(user);
-                navigate(from, {replace: true});
+
+                const currentUser = {
+                    email: user.email
+                };
+                console.log(currentUser);
+
+                // get jwt token
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem('token', data.token);
+                        navigate(from, {replace: true});
+                    });
             }).catch((error) => {
                 console.log(error);
             });
@@ -45,7 +81,25 @@ const Login = () => {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
-                navigate(from, {replace: true});
+                const currentUser = {
+                    email: user.email
+                };
+                console.log(currentUser);
+
+                // get jwt token
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem('token', data.token);
+                        navigate(from, {replace: true});
+                    });
             }).catch((error) => {
                 console.log(error);
             });
@@ -55,7 +109,6 @@ const Login = () => {
         <div className='w-full flex justify-center'>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl mt-28 mb-16 border bg-blue-100">
                 <h1 className="text-2xl font-bold text-center">Login</h1>
-
                 <form onSubmit={onSubmitHandler} className="space-y-6 ng-untouched ng-pristine ng-valid" data-bitwarden-watching="1">
                     <div className="space-y-1 text-sm">
                         <label htmlFor="email" className="block">Email</label>
