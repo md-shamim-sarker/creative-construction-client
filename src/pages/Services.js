@@ -2,8 +2,8 @@ import React, {useContext, useEffect} from 'react';
 import {NavLink, useLoaderData, useLocation} from 'react-router-dom';
 import useTitle from '../hooks/useTitle';
 import {PhotoProvider, PhotoView} from 'react-photo-view';
-import serviceBanner from '../assets/service.png';
 import {AuthContext} from '../contexts/UserContext';
+import Banner from '../components/Banner';
 
 const Services = () => {
     const services = useLoaderData();
@@ -17,9 +17,8 @@ const Services = () => {
 
     return (
         <div className='mb-20'>
-            <div className='w-full mt-16'>
-                <img src={serviceBanner} alt="" className='w-full' />
-            </div>
+            {/* Banner Part */}
+            <Banner></Banner>
 
             {/* Services Part */}
             <div className='my-5'>
