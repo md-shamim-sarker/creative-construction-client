@@ -37,16 +37,29 @@ const MyReviews = () => {
 
     // Delete Review
     const handleDelete = review => {
-        fetch(`https://creative-construction-three.vercel.app/reviews/${review._id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(() => {
-                const remainingReviews = reviews.filter(rev => rev._id !== review._id);
-                setReviews(remainingReviews);
-                setRender(render);
-                deleteSuccess();
-            });
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if(result.isConfirmed) {
+                fetch(`https://creative-construction-three.vercel.app/reviews/${review._id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        const remainingReviews = reviews.filter(rev => rev._id !== review._id);
+                        setReviews(remainingReviews);
+                        setRender(render);
+                        deleteSuccess();
+                    });
+            }
+        });
     };
 
     return (

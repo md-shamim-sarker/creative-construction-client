@@ -18,11 +18,11 @@ const Services = () => {
     return (
         <div className='mb-20'>
             {/* Banner Part */}
-            <Banner></Banner>
+            {/* <Banner></Banner> */}
 
             {/* Services Part */}
             <div className='my-5'>
-                <h2 className='text-5xl font-bold text-blue-700 text-center mt-10'>MY ALL SERVICES</h2>
+                <h2 className='text-5xl font-bold text-blue-700 text-center mt-28'>MY ALL SERVICES</h2>
             </div>
             <div className='w-[95vw] lg:w-4/5 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 my-10'>
                 {
